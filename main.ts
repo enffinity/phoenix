@@ -23,9 +23,14 @@ async function repl() {
             Deno.exit()
         }
 
-        const program = parser.produceAST(input);
-
-        const result = evaluate(program);
-        console.log(result);
+        if(input == 'clear' || input == 'cls') {
+            console.clear();
+            console.log(`${chalk.red(`🐦 Phoenix Repl v${decoder.decode(version)}`)}`);
+            console.log(`${chalk.yellow('Run exit() to exit')}`);
+        } else {
+            const program = parser.produceAST(input);
+            const result = evaluate(program);
+            console.log(result);
+        }
     }
 }
